@@ -1,23 +1,20 @@
-import React from "react"
+import React, {useContext} from "react"
 import Paper from "@mui/material/Paper"
 import List from "@mui/material/List"
 import Divider from "@mui/material/Divider"
 import TodoItem from "./TodoItem"
+import {TodosContext} from "./contexts/todos.context";
 
-function TodoList({ todos, removeTodo, toggleTodo, editTodo }) {
+function TodoList() {
+    const todos = useContext(TodosContext)
     if (todos.length) return (
         <Paper>
             <List>
                 {todos.map((todo, i) => (
                     <>
                         <TodoItem
-                            task={todo.task}
-                            completed={todo.completed}
+                            {...todo}
                             key={todo.id}
-                            id={todo.id}
-                            removeTodo={removeTodo}
-                            toggleTodo={toggleTodo}
-                            editTodo={editTodo}
                         />
                         {i < todos.length - 1 && <Divider />}
                     </>
